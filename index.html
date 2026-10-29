@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>技能中心 · Skills Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">⚡</span>
+      <div>
+        <h1>技能中心</h1>
+        <p class="subtitle">团队小工具 &amp; Skills 下载平台</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="badge" id="totalCount">0 个技能</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 搜索与筛选 -->
+    <section class="toolbar">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="搜索技能名称、描述或标签…" />
+      </div>
+      <div class="filters" id="categoryFilters">
+        <button class="chip active" data-category="all">全部</button>
+      </div>
+    </section>
+
+    <!-- 技能列表 -->
+    <section class="grid" id="skillGrid">
+      <!-- cards injected by app.js -->
+    </section>
+
+    <p class="empty" id="emptyState" hidden>没有找到匹配的技能。</p>
+  </main>
+
+  <!-- 详情弹窗 -->
+  <div class="modal" id="detailModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card">
+      <button class="modal-close" data-close>×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" hidden></div>
+
+  <footer class="footer">
+    <p>© 2026 技能中心 · 由 TRAE 部署托管</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
