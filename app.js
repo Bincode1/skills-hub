@@ -316,6 +316,66 @@ function showToast(msg) {
   }, 2200);
 }
 
+// ===== 反馈表单 =====
+const REPO_URL = "https://github.com/Bincode1/skills-hub";
+const feedbackModal = $("#feedbackModal");
+let feedbackType = "bug";
+
+$("#feedbackBtn").addEventListener("click", () => {
+  feedbackModal.hidden = false;
+});
+
+feedbackModal.addEventListener("click", (e) => {
+  if (e.target.hasAttribute("data-close-feedback")) {
+    feedbackModal.hidden = true;
+  }
+});
+
+// 类型切换
+feedbackModal.querySelectorAll(".type-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    feedbackModal.querySelectorAll(".type-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    feedbackType = btn.dataset.type;
+  });
+});
+
+// 提交反馈 → 跳转 GitHub Issues（预填内容）
+$("#fbSubmit").addEventListener("click", () => {
+  const title = $("#fbTitle").value.trim();
+  const desc = $("#fbDesc").value.trim();
+  const contact = $("#fbContact").value.trim();
+
+  if (!title) {
+    showToast("请填写标题");
+    $("#fbTitle").focus();
+    return;
+  }
+
+  const typeLabel = { bug: "🐛 Bug", feature: "✨ 建议", other: "💭 其他" }[feedbackType];
+  const typeTag = { bug: "bug", feature: "enhancement", other: "" }[feedbackType];
+
+  const body = [
+    `**类型**：${typeLabel}`,
+    "",
+    `**描述**：${desc || "（无）"}`,
+    "",
+    contact ? `**联系方式**：${contact}` : "",
+    "",
+    "---",
+    `_来自技能中心反馈表单 · ${new Date().toLocaleString("zh-CN")}_`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const labels = typeTag ? `&labels=${typeTag}` : "";
+  const url = `${REPO_URL}/issues/new?title=${encodeURIComponent(`[${typeLabel.replace(/[^\u4e00-\u9fa5a-zA-Z]/g, "").trim()}] ${title}`)}&body=${encodeURIComponent(body)}${labels}`;
+
+  window.open(url, "_blank");
+  feedbackModal.hidden = true;
+  showToast("已打开 GitHub Issues，请确认后提交");
+});
+
 // ===== 初始化 =====
 renderCategories();
 applyFilters();

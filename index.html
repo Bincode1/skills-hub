@@ -17,6 +17,7 @@
     </div>
     <div class="top-actions">
       <span class="badge" id="totalCount">0 个技能</span>
+      <button class="btn btn-ghost" id="feedbackBtn">💬 反馈 / 提问题</button>
     </div>
   </header>
 
@@ -48,11 +49,49 @@
     </div>
   </div>
 
+  <!-- 反馈弹窗 -->
+  <div class="modal" id="feedbackModal" hidden>
+    <div class="modal-backdrop" data-close-feedback></div>
+    <div class="modal-card">
+      <button class="modal-close" data-close-feedback>×</button>
+      <h2 style="font-size:20px;margin-bottom:6px">💬 反馈 &amp; 提问题</h2>
+      <p style="color:var(--text-3);font-size:13px;margin-bottom:20px">
+        填写后会跳转到 GitHub Issues 提交，方便我们跟进处理。
+      </p>
+      <div class="detail-section">
+        <div class="detail-label">类型</div>
+        <div class="type-select">
+          <button class="type-btn active" data-type="bug">🐛 Bug 报告</button>
+          <button class="type-btn" data-type="feature">✨ 功能建议</button>
+          <button class="type-btn" data-type="other">💭 其他</button>
+        </div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">标题 <span style="color:#ef4444">*</span></div>
+        <input type="text" id="fbTitle" class="fb-input" placeholder="一句话描述问题或建议" />
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">详细描述</div>
+        <textarea id="fbDesc" class="fb-textarea" rows="5" placeholder="复现步骤、期望结果、实际情况、截图链接等…"></textarea>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">联系方式（可选）</div>
+        <input type="text" id="fbContact" class="fb-input" placeholder="邮箱 / 飞书 / 微信，方便我们联系你" />
+      </div>
+      <div class="detail-actions">
+        <button class="btn btn-ghost" data-close-feedback>取消</button>
+        <button class="btn btn-primary" id="fbSubmit">提交到 GitHub Issues</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div class="toast" id="toast" hidden></div>
 
   <footer class="footer">
-    <p>© 2026 技能中心 · 由 TRAE 部署托管</p>
+    <p>© 2026 技能中心 · 托管于 GitHub Pages ·
+      <a href="https://github.com/Bincode1/skills-hub/issues" target="_blank" style="color:var(--primary);text-decoration:none">问题反馈</a>
+    </p>
   </footer>
 
   <script src="app.js"></script>

@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 技能中心反馈表单
+    url: https://bincode1.github.io/skills-hub/
+    about: 在技能中心页面点击右上角"反馈 / 提问题"按钮，填写后自动跳转到此仓库提交 Issue。
